@@ -24,7 +24,8 @@
 		"reflect-metadata": "~0.1.8",
 		"rxjs": "~5.5.2",
 		"tns-core-modules": "~3.4.0",
-		"zone.js": "~0.8.2"
+		"zone.js": "~0.8.2",
+		"nativescript-angular-material": "file:../src"
 	},
 	"devDependencies": {
 		"babel-traverse": "6.26.0",
