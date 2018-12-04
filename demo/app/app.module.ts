@@ -4,6 +4,7 @@ import { AppRoutingModule } from "./app.routing";
 import { AppComponent } from "./app.component";
 
 import {MainComponent} from "./components/main.component";
+import {MatButtonModule} from "nativescript-angular-material/modules/button";
 
 // Uncomment and add to NgModule imports if you need to use two-way binding
 // import { NativeScriptFormsModule } from "nativescript-angular/forms";
@@ -17,7 +18,8 @@ import {MainComponent} from "./components/main.component";
     ],
     imports: [
         NativeScriptModule,
-        AppRoutingModule
+        MatButtonModule,
+        AppRoutingModule,
     ],
     declarations: [
         AppComponent,
