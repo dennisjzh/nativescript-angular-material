@@ -1,8 +1,8 @@
 .fab-button {
-    height: 5em;
-    width: 5em;
+    height: 50em;
+    width: 50em;
     margin: 15em;
-    background-color: #ff7b00 ;
-    horizontal-align: right;
+    background-color: purple;
+    horizontal-align: left;
     vertical-align: bottom;
 }
