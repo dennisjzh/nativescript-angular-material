@@ -23,7 +23,6 @@ export class Button extends ButtonCommon {
                 get owner() {
                     return self.get();
                 },
-
                 onClick: function (v) {
                     if (this.owner) {
                         this.owner._emit('tap');
@@ -44,18 +43,10 @@ export class Button extends ButtonCommon {
         return this.nativeView.getBackgroundTintList();
     }
 
-    [backgroundColorProperty.setNative](
-        value: Color | android.content.res.ColorStateList
-    ) {
-        let newValue: android.content.res.ColorStateList;
-        if (value instanceof Color) {
-            newValue = android.content.res.ColorStateList.valueOf(value.android);
-        } else {
-            // Resetting with the default value;
-            newValue = value;
-        }
+    [backgroundColorProperty.setNative](value: Color | android.content.res.ColorStateList) {
+        let theValue = value instanceof Color ? android.content.res.ColorStateList.valueOf(value.android) : value;
         try {
-            this.nativeView.setBackgroundTintList(newValue);
+            this.nativeView.setBackgroundTintList(theValue);
         } catch (err) {
             console.log(`Error setNative backgroundColorProperty: `, err);
         }
