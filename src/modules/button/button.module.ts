@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { registerElement } from "nativescript-angular/element-registry";
+import {ButtonCommon} from "./button.common";
 
 @NgModule({
     imports: [
@@ -13,4 +14,4 @@ import { registerElement } from "nativescript-angular/element-registry";
 })
 export class MatButtonModule { }
 
-registerElement("MatButton", () => require("./button").Button);
+registerElement(ButtonCommon.matButton, () => require("./button").Button);

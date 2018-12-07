@@ -3,40 +3,39 @@ import {backgroundColorProperty} from 'tns-core-modules/ui/core/view';
 import {ButtonCommon} from './button.common';
 
 declare var android: any;
+declare var com: any;
 
 export class Button extends ButtonCommon {
-
-    private _androidViewId: number;
-    private _android: any;
 
     get android(): any {
         return this.nativeView;
     }
 
     public createNativeView() {
-        this._android = new android.support.design.widget.FloatingActionButton(
-            this._context
-        );
+        let view = this.createNativeViewByType();
+        this.setOnClickListener(view);
+        return view;
+    }
+
+    private createNativeViewByType() {
+        return (Button.fabButton in this) ? new android.support.design.widget.FloatingActionButton(this._context)
+            : new android.widget.Button(this._context);
+    }
+
+    private setOnClickListener(view) {
         const self = new WeakRef(this);
-        this._android.setOnClickListener(
+        view.setOnClickListener(
             new android.view.View.OnClickListener({
                 get owner() {
                     return self.get();
                 },
                 onClick: function (v) {
                     if (this.owner) {
-                        this.owner._emit('tap');
+                        this.owner._emit(Button.tabEvent);
                     }
                 }
             })
         );
-
-        return this._android;
-    }
-
-    public initNativeView() {
-        this._androidViewId = android.view.View.generateViewId();
-        this.nativeView.setId(this._androidViewId);
     }
 
     [backgroundColorProperty.getDefault](): android.content.res.ColorStateList {
@@ -51,5 +50,4 @@ export class Button extends ButtonCommon {
             console.log(`Error setNative backgroundColorProperty: `, err);
         }
     }
-
 }

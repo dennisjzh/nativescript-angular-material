@@ -1,8 +1,17 @@
-.fab-button {
+.button-left {
     height: 50em;
     width: 50em;
     margin: 15em;
     background-color: purple;
     horizontal-align: left;
+    vertical-align: bottom;
+}
+
+.button-right {
+    height: 50em;
+    width: 50em;
+    margin: 15em;
+    background-color: purple;
+    horizontal-align: right;
     vertical-align: bottom;
 }
