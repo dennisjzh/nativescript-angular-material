@@ -14,4 +14,4 @@ import {ButtonCommon} from "./button.common";
 })
 export class MatButtonModule { }
 
-registerElement(ButtonCommon.matButton, () => require("./button").Button);
+registerElement(ButtonCommon.MatButton, () => require("./button").Button);

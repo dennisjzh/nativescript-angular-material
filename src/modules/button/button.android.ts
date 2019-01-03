@@ -18,7 +18,7 @@ export class Button extends ButtonCommon {
     }
 
     private createNativeViewByType() {
-        return (Button.fabButton in this) ?
+        return (Button.FabButton in this) ?
             new android.support.design.widget.FloatingActionButton(this._context) :
             new android.support.design.button.MaterialButton(this._context);
     }
@@ -32,7 +32,7 @@ export class Button extends ButtonCommon {
                 },
                 onClick: function (v) {
                     if (this.owner) {
-                        this.owner._emit(Button.tabEvent);
+                        this.owner._emit(Button.TabEvent);
                     }
                 }
             })
