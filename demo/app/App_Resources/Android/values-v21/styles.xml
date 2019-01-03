@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Application theme -->
-    <style name="AppTheme" parent="AppThemeBase">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
         <item name="android:datePickerStyle">@style/SpinnerDatePicker</item>
         <item name="android:timePickerStyle">@style/SpinnerTimePicker</item>
     </style>

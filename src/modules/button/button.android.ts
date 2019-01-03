@@ -18,8 +18,9 @@ export class Button extends ButtonCommon {
     }
 
     private createNativeViewByType() {
-        return (Button.fabButton in this) ? new android.support.design.widget.FloatingActionButton(this._context)
-            : new android.widget.Button(this._context);
+        return (Button.fabButton in this) ?
+            new android.support.design.widget.FloatingActionButton(this._context) :
+            new android.support.design.button.MaterialButton(this._context);
     }
 
     private setOnClickListener(view) {
