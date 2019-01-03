@@ -8,10 +8,14 @@
         "platforms": {
             "android": "3.4.0",
             "ios": "3.4.0"
+        },
+        "tns-android": {
+            "version": "5.0.0"
         }
     },
     "scripts": {
         "tsc": "tsc",
+        "tsc.watch": "tsc -w",
         "build": "npm run tsc && npm run build.native",
         "build.native": "node scripts/build-native.js",
         "postclone": "npm i && node scripts/postclone.js && cd ../demo && npm i && npx rimraf -- package-lock.json && cd ../src",
@@ -21,6 +25,7 @@
         "plugin.tscwatch": "npm run tsc -- -w",
         "demo.ios": "npm run tsc && cd ../demo && tns run ios --syncAllFiles --emulator",
         "demo.android": "npm run tsc && cd ../demo && tns run android --syncAllFiles --emulator",
+        "demo.android.watch": "concurrently --kill-others \"npm run tsc.watch\" \"npm run demo.android\" ",
         "demo.reset": "cd ../demo && npx rimraf -- hooks node_modules platforms package-lock.json",
         "plugin.prepare": "npm run build && cd ../demo && tns plugin remove nativescript-angular-material && tns plugin add ../src",
         "clean": "npm run demo.reset && npx rimraf -- node_modules package-lock.json && npm i",
@@ -53,6 +58,7 @@
         "@angular/platform-browser": "~5.2.0",
         "@angular/platform-browser-dynamic": "~5.2.0",
         "@angular/router": "~5.2.0",
+        "concurrently": "^4.1.0",
         "nativescript-angular": "~5.2.0",
         "nativescript-theme-core": "~1.0.4",
         "reflect-metadata": "~0.1.8",
