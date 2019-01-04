@@ -1,6 +1,7 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 import {MatButtonModule} from "nativescript-angular-material/modules/button";
+import {MatChipModule} from "nativescript-angular-material/modules/chip";
 import { AppRoutingModule } from "./app.routing";
 import { AppComponent } from "./app.component";
 import {MainComponent} from "./components/main.component";
@@ -17,8 +18,9 @@ import {MainComponent} from "./components/main.component";
     ],
     imports: [
         NativeScriptModule,
-        MatButtonModule,
         AppRoutingModule,
+        MatButtonModule,
+        MatChipModule,
     ],
     declarations: [
         AppComponent,
