@@ -14,8 +14,7 @@ export class Chip extends ChipCommon {
     public createNativeView() {
         let view = this.createNativeViewByType();
         this.setOnClickListener(view);
-        view.setText("TTT");
-        console.log("chip");
+        view.setText(this[Chip.Text]);
         return view;
     }
 
