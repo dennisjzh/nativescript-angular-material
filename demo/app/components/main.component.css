@@ -15,3 +15,8 @@
     horizontal-align: right;
     vertical-align: bottom;
 }
+
+.chip {
+    width: 100em;
+    height: 50em;
+}

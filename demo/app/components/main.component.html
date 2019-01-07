@@ -1,7 +1,13 @@
 <ActionBar title="My App" class="action-bar">
 </ActionBar>
 <GridLayout rows="*">
-    <mat-chip text="hello">Chip</mat-chip>
+    <mat-chip-group>
+        <mat-chip class="chip" text="hello"></mat-chip>
+        <mat-chip class="chip" text="world"></mat-chip>
+        <mat-chip class="chip" text="world"></mat-chip>
+        <mat-chip class="chip" text="world"></mat-chip>
+        <mat-chip class="chip" text="world"></mat-chip>
+    </mat-chip-group>
     <mat-button mat-fab row="0" class="button-left" (tap)="onTap()">mat button</mat-button>
     <mat-button row="0" class="button-right" (tap)="onTap()">mat button</mat-button>
 </GridLayout>
