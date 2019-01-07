@@ -8,6 +8,7 @@ export class ChipGroupCommon extends LayoutBase {
 
     static readonly MatChipGroup = "mat-chip-group";
     static readonly TabEvent = "tap";
+    static readonly SingleLine = "single-line";
 
     constructor() {
         super();

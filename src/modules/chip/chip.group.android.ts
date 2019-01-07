@@ -14,8 +14,7 @@ export class ChipGroup extends ChipGroupCommon {
     public createNativeView() {
         let view = this.createNativeViewByType();
         this.setOnClickListener(view);
-        view.setSingleLine(true);
-        console.log("chip-group");
+        this.setSingleLine(view);
         return view;
     }
 
@@ -37,6 +36,12 @@ export class ChipGroup extends ChipGroupCommon {
                 }
             })
         );
+    }
+
+    private setSingleLine(view) {
+        if (ChipGroup.SingleLine in this) {
+            view.setSingleLine(true);
+        }
     }
 
     [backgroundColorProperty.getDefault](): android.content.res.ColorStateList {
