@@ -1,6 +1,6 @@
 import {Color} from 'tns-core-modules/color';
 import {backgroundColorProperty} from 'tns-core-modules/ui/core/view';
-import {ChipCommon} from './chip.common';
+import {ChipCommon, ChipType} from './chip.common';
 
 declare var android: any;
 declare var com: any;
@@ -15,6 +15,7 @@ export class Chip extends ChipCommon {
         let view = this.createNativeViewByType();
         this.setOnClickListener(view);
         view.setText(this[Chip.Text]);
+        this.setType(view, this[Chip.Type] || this.parent[Chip.Type]);
         return view;
     }
 
@@ -36,6 +37,22 @@ export class Chip extends ChipCommon {
                 }
             })
         );
+    }
+
+    public setType(nativeView, type: string) {
+
+        switch (type) {
+            case ChipType.Action:
+                break;
+            case ChipType.Choice:
+                break;
+            case ChipType.Entry:
+                nativeView.setCloseIconVisible(true);
+                break;
+            case ChipType.Filter:
+                nativeView.setCheckable(true);
+                break;
+        }
     }
 
     [backgroundColorProperty.getDefault](): android.content.res.ColorStateList {

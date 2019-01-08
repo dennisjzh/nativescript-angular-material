@@ -1,6 +1,9 @@
 import {Color} from 'tns-core-modules/color';
+import {View} from 'tns-core-modules/ui/page/page';
 import {backgroundColorProperty} from 'tns-core-modules/ui/core/view';
 import {ChipGroupCommon} from './chip.group.common';
+import {Chip} from './chip.android';
+import {ChipType} from './chip.common';
 
 declare var android: any;
 declare var com: any;
