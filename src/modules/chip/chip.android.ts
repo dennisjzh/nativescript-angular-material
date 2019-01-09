@@ -45,7 +45,9 @@ export class Chip extends ChipCommon {
             case ChipType.Action:
                 break;
             case ChipType.Choice:
-                break;
+                nativeView.setCheckable(true);
+                nativeView.setCheckedIcon(null);
+            break;
             case ChipType.Entry:
                 nativeView.setCloseIconVisible(true);
                 break;

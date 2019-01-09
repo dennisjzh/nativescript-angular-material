@@ -1,12 +1,9 @@
 import {Color} from 'tns-core-modules/color';
-import {View} from 'tns-core-modules/ui/page/page';
 import {backgroundColorProperty} from 'tns-core-modules/ui/core/view';
 import {ChipGroupCommon} from './chip.group.common';
-import {Chip} from './chip.android';
 import {ChipType} from './chip.common';
 
 declare var android: any;
-declare var com: any;
 
 export class ChipGroup extends ChipGroupCommon {
 
@@ -18,6 +15,7 @@ export class ChipGroup extends ChipGroupCommon {
         let view = this.createNativeViewByType();
         this.setOnClickListener(view);
         this.setSingleLine(view);
+        this.setSingleSelection(view);
         return view;
     }
 
@@ -32,7 +30,7 @@ export class ChipGroup extends ChipGroupCommon {
                 get owner() {
                     return self.get();
                 },
-                onClick: function (v) {
+                onClick: function () {
                     if (this.owner) {
                         this.owner._emit(ChipGroup.TabEvent);
                     }
@@ -44,6 +42,12 @@ export class ChipGroup extends ChipGroupCommon {
     private setSingleLine(view) {
         if (ChipGroup.SingleLine in this) {
             view.setSingleLine(true);
+        }
+    }
+
+    private setSingleSelection(view) {
+        if (this[ChipGroup.Type] === ChipType.Choice) {
+            view.setSingleSelection(true);
         }
     }
 
