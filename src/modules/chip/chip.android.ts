@@ -6,7 +6,7 @@ declare var android: any;
 declare var com: any;
 
 export class Chip extends ChipCommon {
-    
+
     isChecked(): boolean {
         return this.nativeView.isChecked();
     }
@@ -15,12 +15,43 @@ export class Chip extends ChipCommon {
         return this.nativeView;
     }
 
-    public createNativeView() {
+    createNativeView() {
         let view = this.createNativeViewByType();
         this.setOnClickListener(view);
         view.setText(this[Chip.Text]);
         this.setType(view, this[Chip.Type] || this.parent[Chip.Type]);
         return view;
+    }
+
+    public setType(nativeView, type: string) {
+
+        switch (type) {
+            case ChipType.Action:
+                break;
+            case ChipType.Choice:
+                nativeView.setCheckable(true);
+                nativeView.setCheckedIcon(null);
+            break;
+            case ChipType.Entry:
+                nativeView.setCloseIconVisible(true);
+                break;
+            case ChipType.Filter:
+                nativeView.setCheckable(true);
+                break;
+        }
+    }
+
+    [backgroundColorProperty.getDefault](): android.content.res.ColorStateList {
+        return this.nativeView.getBackgroundTintList();
+    }
+
+    [backgroundColorProperty.setNative](value: Color | android.content.res.ColorStateList) {
+        let theValue = value instanceof Color ? android.content.res.ColorStateList.valueOf(value.android) : value;
+        try {
+            this.nativeView.setBackgroundTintList(theValue);
+        } catch (err) {
+            console.log(`Error setNative backgroundColorProperty: `, err);
+        }
     }
 
     private createNativeViewByType() {
@@ -67,34 +98,4 @@ export class Chip extends ChipCommon {
         );
     }
 
-    public setType(nativeView, type: string) {
-
-        switch (type) {
-            case ChipType.Action:
-                break;
-            case ChipType.Choice:
-                nativeView.setCheckable(true);
-                nativeView.setCheckedIcon(null);
-            break;
-            case ChipType.Entry:
-                nativeView.setCloseIconVisible(true);
-                break;
-            case ChipType.Filter:
-                nativeView.setCheckable(true);
-                break;
-        }
-    }
-
-    [backgroundColorProperty.getDefault](): android.content.res.ColorStateList {
-        return this.nativeView.getBackgroundTintList();
-    }
-
-    [backgroundColorProperty.setNative](value: Color | android.content.res.ColorStateList) {
-        let theValue = value instanceof Color ? android.content.res.ColorStateList.valueOf(value.android) : value;
-        try {
-            this.nativeView.setBackgroundTintList(theValue);
-        } catch (err) {
-            console.log(`Error setNative backgroundColorProperty: `, err);
-        }
-    }
 }

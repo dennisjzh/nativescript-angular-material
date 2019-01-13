@@ -9,6 +9,22 @@
             true,
             "spaces"
         ],
+        "member-ordering": [
+            true,
+            {
+              "order": [
+                "public-static-field",
+                "public-instance-field",
+                "public-constructor",
+                "private-static-field",
+                "private-instance-field",
+                "private-constructor",
+                "public-instance-method",
+                "protected-instance-method",
+                "private-instance-method"
+              ]
+            }
+          ],
         "no-duplicate-variable": true,
         "no-eval": true,
         "no-internal-module": true,

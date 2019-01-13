@@ -19,24 +19,17 @@ export class ChipGroup extends ChipGroupCommon {
         return view;
     }
 
-    private createNativeViewByType() {
-        return new android.support.design.chip.ChipGroup(this._context);
+    [backgroundColorProperty.getDefault](): android.content.res.ColorStateList {
+        return this.nativeView.getBackgroundTintList();
     }
 
-    private setOnClickListener(view) {
-        const self = new WeakRef(this);
-        view.setOnClickListener(
-            new android.view.View.OnClickListener({
-                get owner() {
-                    return self.get();
-                },
-                onClick: function () {
-                    if (this.owner) {
-                        this.owner._emit(ChipGroup.TabEvent);
-                    }
-                }
-            })
-        );
+    [backgroundColorProperty.setNative](value: Color | android.content.res.ColorStateList) {
+        let theValue = value instanceof Color ? android.content.res.ColorStateList.valueOf(value.android) : value;
+        try {
+            this.nativeView.setBackgroundTintList(theValue);
+        } catch (err) {
+            console.log(`Error setNative backgroundColorProperty: `, err);
+        }
     }
 
     private setSingleLine(view) {
@@ -51,16 +44,4 @@ export class ChipGroup extends ChipGroupCommon {
         }
     }
 
-    [backgroundColorProperty.getDefault](): android.content.res.ColorStateList {
-        return this.nativeView.getBackgroundTintList();
-    }
-
-    [backgroundColorProperty.setNative](value: Color | android.content.res.ColorStateList) {
-        let theValue = value instanceof Color ? android.content.res.ColorStateList.valueOf(value.android) : value;
-        try {
-            this.nativeView.setBackgroundTintList(theValue);
-        } catch (err) {
-            console.log(`Error setNative backgroundColorProperty: `, err);
-        }
-    }
 }
