@@ -6,6 +6,10 @@ declare var android: any;
 declare var com: any;
 
 export class Chip extends ChipCommon {
+    
+    isChecked(): boolean {
+        return this.nativeView.isChecked();
+    }
 
     get android(): any {
         return this.nativeView;
@@ -33,6 +37,30 @@ export class Chip extends ChipCommon {
                 onClick: function (v) {
                     if (this.owner) {
                         this.owner._emit(Chip.TabEvent);
+                    }
+                }
+            })
+        );
+        view.setOnCloseIconClickListener(
+            new android.view.View.OnClickListener({
+                get owner() {
+                    return self.get();
+                },
+                onClick: function (v) {
+                    if (this.owner) {
+                        this.owner._emit(Chip.CloseEvent);
+                    }
+                }
+            })
+        );
+        view.setOnCheckedChangeListener(
+            new android.widget.CompoundButton.OnCheckedChangeListener({
+                get owner() {
+                    return self.get();
+                },
+                onCheckedChanged: function (v, isChecked) {
+                    if (this.owner) {
+                        this.owner._emit(Chip.CheckEvent);
                     }
                 }
             })

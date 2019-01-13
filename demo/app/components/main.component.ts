@@ -1,4 +1,6 @@
 import {Component} from "@angular/core";
+import {Chip} from "nativescript-angular-material/modules/chip/chip.android";//FIXME: platform specific 
+
 
 @Component({
     selector: "ns-main",
@@ -14,4 +16,15 @@ export class MainComponent {
     onTap() {
         console.log("tap");
     }
+
+    onClose() {
+        console.log("close");
+    }
+
+    onCheck(e) {
+        let chip:Chip = e.object;
+        console.log("check - " + chip.isChecked());
+    }
+
+
 }

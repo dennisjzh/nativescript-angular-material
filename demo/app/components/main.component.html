@@ -2,8 +2,8 @@
 </ActionBar>
 <GridLayout rows="*">
     <mat-chip-group single-line1 type="filter">
-        <mat-chip class="chip" text="hello"></mat-chip>
-        <mat-chip class="chip" text="world"></mat-chip>
+        <mat-chip class="chip" (tap)="onTap()" (check)="onCheck($event)" text="hello"></mat-chip>
+        <mat-chip class="chip" type="entry" (close)="onClose()" text="world"></mat-chip>
         <mat-chip class="chip" text="world"></mat-chip>
         <mat-chip class="chip" text="world"></mat-chip>
         <mat-chip class="chip" text="world"></mat-chip>
