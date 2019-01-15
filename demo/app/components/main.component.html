@@ -1,13 +1,13 @@
 <ActionBar title="My App" class="action-bar">
 </ActionBar>
 <GridLayout rows="*">
-    <mat-chip-group single-line1 type="filter">
-        <mat-chip class="chip" (tap)="onTap()" (check)="onCheck($event)" text="hello"></mat-chip>
-        <mat-chip class="chip" type="entry" (close)="onClose()" text="world"></mat-chip>
+    <mat-chip-group single-line1 type="choice" (check)="onCheck($event)" (close)="onClose($event)">
+        <mat-chip class="chip" text="hello" (tap)="onTap($event)"></mat-chip>
+        <mat-chip class="chip" text="world"></mat-chip>
         <mat-chip class="chip" text="world"></mat-chip>
         <mat-chip class="chip" text="world"></mat-chip>
         <mat-chip class="chip" text="world"></mat-chip>
     </mat-chip-group>
-    <mat-button mat-fab row="0" class="button-left" (tap)="onTap()">mat button</mat-button>
-    <mat-button row="0" class="button-right" (tap)="onTap()">mat button</mat-button>
+    <mat-button mat-fab row="0" class="button-left" (tap)="onTap($event)">mat button</mat-button>
+    <mat-button row="0" class="button-right" (tap)="onTap($event)">mat button</mat-button>
 </GridLayout>

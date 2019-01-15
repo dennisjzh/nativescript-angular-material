@@ -1,5 +1,6 @@
 import {Color} from 'tns-core-modules/color';
-import {backgroundColorProperty} from 'tns-core-modules/ui/core/view';
+import {View} from 'tns-core-modules/ui/page/page';
+import {backgroundColorProperty, EventData} from 'tns-core-modules/ui/core/view';
 import {ChipCommon, ChipType} from './chip.common';
 
 declare var android: any;
@@ -17,7 +18,7 @@ export class Chip extends ChipCommon {
 
     createNativeView() {
         let view = this.createNativeViewByType();
-        this.setOnClickListener(view);
+        this.setUpListeners(view);
         view.setText(this[Chip.Text]);
         this.setType(view, this[Chip.Type] || this.parent[Chip.Type]);
         return view;
@@ -31,7 +32,7 @@ export class Chip extends ChipCommon {
             case ChipType.Choice:
                 nativeView.setCheckable(true);
                 nativeView.setCheckedIcon(null);
-            break;
+                break;
             case ChipType.Entry:
                 nativeView.setCloseIconVisible(true);
                 break;
@@ -58,44 +59,26 @@ export class Chip extends ChipCommon {
         return new android.support.design.chip.Chip(this._context);
     }
 
-    private setOnClickListener(view) {
+    private setUpListeners(view) {
         const self = new WeakRef(this);
-        view.setOnClickListener(
-            new android.view.View.OnClickListener({
-                get owner() {
-                    return self.get();
-                },
-                onClick: function (v) {
-                    if (this.owner) {
-                        this.owner._emit(Chip.TabEvent);
-                    }
+        const on = (event: string) =>
+            (v) => {
+                const owner = self.get();
+                if (owner) {
+                    owner.parent.notify({
+                        eventName: event,
+                        object: owner,
+                    });
                 }
-            })
-        );
+
+            };
         view.setOnCloseIconClickListener(
             new android.view.View.OnClickListener({
-                get owner() {
-                    return self.get();
-                },
-                onClick: function (v) {
-                    if (this.owner) {
-                        this.owner._emit(Chip.CloseEvent);
-                    }
-                }
-            })
-        );
+                onClick: on(Chip.CloseEvent)
+            }));
         view.setOnCheckedChangeListener(
             new android.widget.CompoundButton.OnCheckedChangeListener({
-                get owner() {
-                    return self.get();
-                },
-                onCheckedChanged: function (v, isChecked) {
-                    if (this.owner) {
-                        this.owner._emit(Chip.CheckEvent);
-                    }
-                }
-            })
-        );
+                onCheckedChanged: on(Chip.CheckEvent)
+            }));
     }
-
 }

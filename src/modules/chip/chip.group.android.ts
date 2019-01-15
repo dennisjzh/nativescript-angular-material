@@ -13,7 +13,6 @@ export class ChipGroup extends ChipGroupCommon {
 
     public createNativeView() {
         let view = this.createNativeViewByType();
-        this.setOnClickListener(view);
         this.setSingleLine(view);
         this.setSingleSelection(view);
         return view;
@@ -46,22 +45,6 @@ export class ChipGroup extends ChipGroupCommon {
 
     private createNativeViewByType() {
         return new android.support.design.chip.ChipGroup(this._context);
-    }
-
-    private setOnClickListener(view) {
-        const self = new WeakRef(this);
-        view.setOnClickListener(
-            new android.view.View.OnClickListener({
-                get owner() {
-                    return self.get();
-                },
-                onClick: function () {
-                    if (this.owner) {
-                        this.owner._emit(ChipGroup.TabEvent);
-                    }
-                }
-            })
-        );
     }
 
 }

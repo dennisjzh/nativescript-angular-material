@@ -11,7 +11,7 @@ export abstract class ChipCommon extends View {
 
     static readonly MatChip = "mat-chip";
     static readonly Text = "text";
-    static readonly TabEvent = "tap";
+    static readonly TapEvent = "tap";
     static readonly CloseEvent = "close";
     static readonly CheckEvent = "check";
     static readonly Type = "type";
