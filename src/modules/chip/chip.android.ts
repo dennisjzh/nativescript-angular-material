@@ -65,10 +65,12 @@ export class Chip extends ChipCommon {
             (v) => {
                 const owner = self.get();
                 if (owner) {
-                    owner.parent.notify({
+                    const eventData: EventData = {
                         eventName: event,
                         object: owner,
-                    });
+                    };
+                    owner.notify(eventData);
+                    owner.parent.notify(eventData);
                 }
 
             };

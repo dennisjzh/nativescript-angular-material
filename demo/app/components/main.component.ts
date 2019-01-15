@@ -18,8 +18,8 @@ export class MainComponent {
     }
 
     onClose(e) {
-        console.log("close");
         let chip: Chip = e.object;
+        console.log("close - " + chip.typeName);
         // chip.parent._removeView(e.object);
     }
 

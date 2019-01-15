@@ -1,8 +1,8 @@
 <ActionBar title="My App" class="action-bar">
 </ActionBar>
 <GridLayout rows="*">
-    <mat-chip-group single-line1 type="choice" (check)="onCheck($event)" (close)="onClose($event)">
-        <mat-chip class="chip" text="hello" (tap)="onTap($event)"></mat-chip>
+    <mat-chip-group single-line1 type="entry" (tap)="onTap($event)" (check)="onCheck($event)" (close)="onClose($event)">
+        <mat-chip class="chip" text="hello" (tap)="onTap($event)" (check)="onCheck($event)" (close)="onClose($event)"></mat-chip>
         <mat-chip class="chip" text="world"></mat-chip>
         <mat-chip class="chip" text="world"></mat-chip>
         <mat-chip class="chip" text="world"></mat-chip>
