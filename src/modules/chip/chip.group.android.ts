@@ -2,7 +2,7 @@ import {Color} from 'tns-core-modules/color';
 import {backgroundColorProperty} from 'tns-core-modules/ui/core/view';
 import {ChipGroupCommon} from './chip.group.common';
 import {ChipType} from './chip.common';
-
+let Chip = require("./chip").Chip;
 declare var android: any;
 
 export class ChipGroup extends ChipGroupCommon {
@@ -44,6 +44,7 @@ export class ChipGroup extends ChipGroupCommon {
     }
 
     private createNativeViewByType() {
+        console.log(new Chip().typeName + "WHAT!");
         return new android.support.design.chip.ChipGroup(this._context);
     }
 
