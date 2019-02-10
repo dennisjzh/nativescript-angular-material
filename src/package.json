@@ -2,15 +2,12 @@
     "name": "nativescript-angular-material",
     "version": "1.0.0",
     "description": "Your awesome NativeScript plugin.",
-    "main": "angular-material",
+    "main": "chip",
     "typings": "index.d.ts",
     "nativescript": {
         "platforms": {
             "android": "3.4.0",
             "ios": "3.4.0"
-        },
-        "tns-android": {
-            "version": "5.0.0"
         }
     },
     "scripts": {

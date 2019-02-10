@@ -1,13 +1,8 @@
-import {View} from 'tns-core-modules/ui/page/page';
-import {CustomLayoutView} from 'tns-core-modules/ui/page/page';
-import {GridLayout} from 'tns-core-modules/ui/layouts/grid-layout';
-import {StackLayout} from 'tns-core-modules/ui/layouts/stack-layout';
 import {LayoutBase} from 'tns-core-modules/ui/layouts/layout-base';
 
 export class ChipGroupCommon extends LayoutBase {
 
     static readonly MatChipGroup = "mat-chip-group";
-    static readonly TabEvent = "tap";
     static readonly SingleLine = "single-line";
     static readonly Type = "type";
 
@@ -15,5 +10,4 @@ export class ChipGroupCommon extends LayoutBase {
         super();
         console.log("chip group common");
     }
-
 }
