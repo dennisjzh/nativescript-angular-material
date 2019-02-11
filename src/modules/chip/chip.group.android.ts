@@ -2,7 +2,7 @@ import {Color} from 'tns-core-modules/color';
 import {backgroundColorProperty, EventData, View} from 'tns-core-modules/ui/core/view';
 import {ChipGroupCommon} from './chip.group.common';
 import {ChipType} from './chip.common';
-import {Chip} from './';
+const Chip = require('./chip').Chip;
 
 declare var android: any;
 

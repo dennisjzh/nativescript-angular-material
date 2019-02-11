@@ -1,17 +1,10 @@
-/// <reference path="./modules/test/index.comm.ts" />
-
 import {Color} from 'tns-core-modules/color';
-import {View} from 'tns-core-modules/ui/page/page';
 import {backgroundColorProperty, EventData} from 'tns-core-modules/ui/core/view';
 import {ChipCommon, ChipType} from './chip.common';
-// import {TestComm} from "./modules/test/index.comm";
 
 
 declare var android: any;
 declare var com: any;
-
-export class Test extends test.TestComm {
-}
 
 export class Chip extends ChipCommon {
 

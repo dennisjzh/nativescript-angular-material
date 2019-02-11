@@ -1,5 +1,5 @@
-import {ChipGroupCommon} from './chip.group.common';
-import {ChipCommon} from './chip.common';
+import {ChipGroupCommon} from '../../chip.group.common';
+import {ChipCommon} from '../../chip.common';
 
 export class ChipGroup extends ChipGroupCommon {
 

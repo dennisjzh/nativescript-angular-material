@@ -2,7 +2,7 @@
     "name": "nativescript-angular-material",
     "version": "1.0.0",
     "description": "Your awesome NativeScript plugin.",
-    "main": "chip",
+    "main": "angular-material",
     "typings": "index.d.ts",
     "nativescript": {
         "platforms": {

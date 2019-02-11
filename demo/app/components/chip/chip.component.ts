@@ -22,7 +22,7 @@ export class ChipComponent {
     onClose(e) {
         let chip: Chip = e.object;
         // const test: Test = new Test();
-        console.log("chip close event- " + chip.typeName + " - " + test.greet());
+        console.log("chip close event- " + chip.typeName + " - " );
     }
 
 }
