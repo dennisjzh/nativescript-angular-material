@@ -8,9 +8,6 @@
         "platforms": {
             "android": "3.4.0",
             "ios": "3.4.0"
-        },
-        "tns-android": {
-            "version": "5.0.0"
         }
     },
     "scripts": {

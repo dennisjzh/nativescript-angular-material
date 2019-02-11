@@ -1,8 +1,9 @@
 import {Color} from 'tns-core-modules/color';
-import {backgroundColorProperty} from 'tns-core-modules/ui/core/view';
+import {backgroundColorProperty, EventData, View} from 'tns-core-modules/ui/core/view';
 import {ChipGroupCommon} from './chip.group.common';
 import {ChipType} from './chip.common';
-let Chip = require("./chip").Chip;
+const Chip = require('./chip').Chip;
+
 declare var android: any;
 
 export class ChipGroup extends ChipGroupCommon {
@@ -15,7 +16,18 @@ export class ChipGroup extends ChipGroupCommon {
         let view = this.createNativeViewByType();
         this.setSingleLine(view);
         this.setSingleSelection(view);
+        this.setUpListeners(view);
         return view;
+    }
+
+    add(chip: string) {
+        const child = new Chip();
+        child[Chip.Text] = chip;
+        this.addChild(child);
+    }
+
+    getChips() {
+        const count = this.getChildrenCount();
     }
 
     [backgroundColorProperty.getDefault](): android.content.res.ColorStateList {
@@ -41,6 +53,12 @@ export class ChipGroup extends ChipGroupCommon {
         if (this[ChipGroup.Type] === ChipType.Choice) {
             view.setSingleSelection(true);
         }
+    }
+
+    private setUpListeners(view) {
+        this.addEventListener(Chip.CloseEvent, data => {
+            this.removeChild(data.object as View);
+        });
     }
 
     private createNativeViewByType() {

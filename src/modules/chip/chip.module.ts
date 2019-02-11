@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { registerElement } from "nativescript-angular/element-registry";
-import {ChipCommon} from "./chip.common";
-import {ChipGroupCommon} from "./chip.group.common";
+import {ChipCommon} from "../../chip.common";
+import {ChipGroupCommon} from "../../chip.group.common";
 
 @NgModule({
     imports: [

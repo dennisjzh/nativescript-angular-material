@@ -1,4 +1,4 @@
-import {ChipCommon} from './chip.common';
+import {ChipCommon} from '../../chip.common';
 
 export class Chip extends ChipCommon {
 
