@@ -26,8 +26,14 @@ export class ChipGroup extends ChipGroupCommon {
         this.addChild(child);
     }
 
-    getChips() {
+    getChips(): string[] {
         const count = this.getChildrenCount();
+        const chips = [];
+        for (let i = 0; i < count; i++) {
+            const chip = this.getChildAt(i).nativeView;
+            chips.push(chip.getText());
+        }
+        return chips;
     }
 
     [backgroundColorProperty.getDefault](): android.content.res.ColorStateList {
