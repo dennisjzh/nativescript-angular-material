@@ -1,4 +1,4 @@
-import {Component, ViewChild} from "@angular/core";
+import {Component, ViewChild, OnInit} from "@angular/core";
 import {TextField} from "tns-core-modules/ui/text-field";
 import {Chip, ChipGroup, AngularMaterial} from "nativescript-angular-material";
 
@@ -8,9 +8,14 @@ import {Chip, ChipGroup, AngularMaterial} from "nativescript-angular-material";
     templateUrl: "./chip.component.html",
     styleUrls: ["./chip.component.css"]
 })
-export class ChipComponent {
-
+export class ChipComponent implements OnInit {
     @ViewChild("chipGroup") chipGroup;
+
+    ngOnInit(): void {
+        const chipGroup: ChipGroup = this.chipGroup.nativeElement;
+        chipGroup.chips.subscribe(chips =>
+            console.log(chips));
+    }
 
     onReturnPress(event) {
         const textField: TextField = event.object;
@@ -20,9 +25,7 @@ export class ChipComponent {
     }
 
     onClose(e) {
-        let chip: Chip = e.object;
-        // const test: Test = new Test();
-        console.log("chip close event- " + chip.typeName + " - " );
+        const chipGroup: ChipGroup = this.chipGroup.nativeElement;
     }
 
 }

@@ -1,7 +1,7 @@
-import { Common } from './angular-material.common';
-import {ChipCommon} from "./chip.common";
+import {Common} from './angular-material.common';
+import {ChipCommon} from "./modules/chip/chip.common";
 import {ChipGroupCommon} from "./modules/chip/chip.group.common";
-// import {TestComm} from "./test.comm";
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 export declare class AngularMaterial extends Common {
   // define your typings manually
@@ -16,6 +16,7 @@ export declare class Chip extends ChipCommon {
 
 export declare class ChipGroup extends ChipGroupCommon {
   add(chip: string);
+  readonly chips: BehaviorSubject<string[]>;
 }
 
 // export declare class Test extends TestComm {

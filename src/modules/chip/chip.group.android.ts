@@ -1,5 +1,7 @@
 import {Color} from 'tns-core-modules/color';
 import {backgroundColorProperty, EventData, View} from 'tns-core-modules/ui/core/view';
+import {Observable} from 'rxjs/Observable';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {ChipGroupCommon} from './chip.group.common';
 import {ChipType} from './chip.common';
 const Chip = require('./chip').Chip;
@@ -7,6 +9,8 @@ const Chip = require('./chip').Chip;
 declare var android: any;
 
 export class ChipGroup extends ChipGroupCommon {
+
+    private chipsObservable: BehaviorSubject<string[]> = new BehaviorSubject([]);
 
     get android(): any {
         return this.nativeView;
@@ -26,14 +30,14 @@ export class ChipGroup extends ChipGroupCommon {
         this.addChild(child);
     }
 
-    getChips(): string[] {
-        const count = this.getChildrenCount();
-        const chips = [];
-        for (let i = 0; i < count; i++) {
-            const chip = this.getChildAt(i).nativeView;
-            chips.push(chip.getText());
-        }
-        return chips;
+    addChild(view: View): void {
+        super.addChild(view);
+        this.updateChips();
+        console.log(this.getChildrenCount());
+    }
+
+    get chips(): BehaviorSubject<string[]> {
+        return this.chipsObservable;
     }
 
     [backgroundColorProperty.getDefault](): android.content.res.ColorStateList {
@@ -63,13 +67,30 @@ export class ChipGroup extends ChipGroupCommon {
 
     private setUpListeners(view) {
         this.addEventListener(Chip.CloseEvent, data => {
-            this.removeChild(data.object as View);
+            this.onChipClose(data.object);
         });
+    }
+
+    private onChipClose(chip) {
+        this.removeChild(chip);
+        this.updateChips();
     }
 
     private createNativeViewByType() {
         console.log(new Chip().typeName + "WHAT!");
         return new android.support.design.chip.ChipGroup(this._context);
     }
+
+    private updateChips(): void {
+        const count = this.getChildrenCount();
+        const chips = [];
+        for (let i = 0; i < count; i++) {
+            const chip = this.getChildAt(i);
+            chips.push(chip[Chip.Text]);
+        }
+        this.chipsObservable.next(chips);
+    }
+
+
 
 }
