@@ -8,16 +8,8 @@ declare var com: any;
 
 export class Chip extends ChipCommon {
 
-    constructor() {
-        super();
-    }
-
     isChecked(): boolean {
         return this.nativeView.isChecked();
-    }
-
-    newInstance(): ChipCommon {
-        return new Chip();
     }
 
     get android(): any {

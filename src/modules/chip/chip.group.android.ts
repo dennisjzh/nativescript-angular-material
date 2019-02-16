@@ -1,6 +1,5 @@
 import {Color} from 'tns-core-modules/color';
-import {backgroundColorProperty, EventData, View} from 'tns-core-modules/ui/core/view';
-import {Observable} from 'rxjs/Observable';
+import {backgroundColorProperty, ViewBase} from 'tns-core-modules/ui/core/view';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {ChipGroupCommon} from './chip.group.common';
 import {ChipType} from './chip.common';
@@ -10,7 +9,8 @@ declare var android: any;
 
 export class ChipGroup extends ChipGroupCommon {
 
-    private chipsObservable: BehaviorSubject<string[]> = new BehaviorSubject([]);
+    private chipList: string[] = [];
+    private chipsObservable: BehaviorSubject<string[]> = new BehaviorSubject(this.chipList);
 
     get android(): any {
         return this.nativeView;
@@ -20,7 +20,7 @@ export class ChipGroup extends ChipGroupCommon {
         let view = this.createNativeViewByType();
         this.setSingleLine(view);
         this.setSingleSelection(view);
-        this.setUpListeners(view);
+        this.setUpListeners();
         return view;
     }
 
@@ -28,12 +28,6 @@ export class ChipGroup extends ChipGroupCommon {
         const child = new Chip();
         child[Chip.Text] = chip;
         this.addChild(child);
-    }
-
-    addChild(view: View): void {
-        super.addChild(view);
-        this.updateChips();
-        console.log(this.getChildrenCount());
     }
 
     get chips(): BehaviorSubject<string[]> {
@@ -53,6 +47,15 @@ export class ChipGroup extends ChipGroupCommon {
         }
     }
 
+    _addViewToNativeVisualTree(view: ViewBase, atIndex?: number): boolean {
+        const success = super._addViewToNativeVisualTree(view, atIndex);
+        if (success) {
+            this.chipList.push(view[Chip.Text]);
+            this.chipsObservable.next(this.chipList);
+        }
+        return success;
+    }
+
     private setSingleLine(view) {
         if (ChipGroup.SingleLine in this) {
             view.setSingleLine(true);
@@ -65,7 +68,7 @@ export class ChipGroup extends ChipGroupCommon {
         }
     }
 
-    private setUpListeners(view) {
+    private setUpListeners() {
         this.addEventListener(Chip.CloseEvent, data => {
             this.onChipClose(data.object);
         });
@@ -73,24 +76,22 @@ export class ChipGroup extends ChipGroupCommon {
 
     private onChipClose(chip) {
         this.removeChild(chip);
-        this.updateChips();
+        this.chipList = this.refreshChips();
+        this.chipsObservable.next(this.chipList);
     }
 
-    private createNativeViewByType() {
-        console.log(new Chip().typeName + "WHAT!");
-        return new android.support.design.chip.ChipGroup(this._context);
-    }
-
-    private updateChips(): void {
+    private refreshChips(): string[] {
         const count = this.getChildrenCount();
         const chips = [];
         for (let i = 0; i < count; i++) {
             const chip = this.getChildAt(i);
             chips.push(chip[Chip.Text]);
         }
-        this.chipsObservable.next(chips);
+        return chips;
     }
 
-
+    private createNativeViewByType() {
+        return new android.support.design.chip.ChipGroup(this._context);
+    }
 
 }
