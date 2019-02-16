@@ -2,15 +2,14 @@ import {Color} from 'tns-core-modules/color';
 import {backgroundColorProperty, ViewBase} from 'tns-core-modules/ui/core/view';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {ChipGroupCommon} from './chip.group.common';
-import {ChipType} from './chip.common';
+import {ChipType, ChipCommon} from './chip.common';
 const Chip = require('./chip').Chip;
 
 declare var android: any;
 
 export class ChipGroup extends ChipGroupCommon {
 
-    private chipList: string[] = [];
-    private chipsObservable: BehaviorSubject<string[]> = new BehaviorSubject(this.chipList);
+    private chipsObservable: BehaviorSubject<string[]> = new BehaviorSubject([]);
 
     get android(): any {
         return this.nativeView;
@@ -20,7 +19,7 @@ export class ChipGroup extends ChipGroupCommon {
         let view = this.createNativeViewByType();
         this.setSingleLine(view);
         this.setSingleSelection(view);
-        this.setUpListeners();
+        this.setupListeners();
         return view;
     }
 
@@ -35,13 +34,13 @@ export class ChipGroup extends ChipGroupCommon {
     }
 
     [backgroundColorProperty.getDefault](): android.content.res.ColorStateList {
-        return this.nativeView.getBackgroundTintList();
+        return this.android.getBackgroundTintList();
     }
 
     [backgroundColorProperty.setNative](value: Color | android.content.res.ColorStateList) {
         let theValue = value instanceof Color ? android.content.res.ColorStateList.valueOf(value.android) : value;
         try {
-            this.nativeView.setBackgroundTintList(theValue);
+            this.android.setBackgroundTintList(theValue);
         } catch (err) {
             console.log(`Error setNative backgroundColorProperty: `, err);
         }
@@ -50,8 +49,7 @@ export class ChipGroup extends ChipGroupCommon {
     _addViewToNativeVisualTree(view: ViewBase, atIndex?: number): boolean {
         const success = super._addViewToNativeVisualTree(view, atIndex);
         if (success) {
-            this.chipList.push(view[Chip.Text]);
-            this.chipsObservable.next(this.chipList);
+            this.chipsObservable.next(this.refreshChips());
         }
         return success;
     }
@@ -68,24 +66,32 @@ export class ChipGroup extends ChipGroupCommon {
         }
     }
 
-    private setUpListeners() {
+    private setupListeners() {
         this.addEventListener(Chip.CloseEvent, data => {
             this.onChipClose(data.object);
+        });
+        this.addEventListener(Chip.CheckEvent, data => {
+            this.onChipCheckChanged(data.object);
         });
     }
 
     private onChipClose(chip) {
         this.removeChild(chip);
-        this.chipList = this.refreshChips();
-        this.chipsObservable.next(this.chipList);
+        this.chipsObservable.next(this.refreshChips());
+    }
+
+    private onChipCheckChanged(chip) {
+        this.chipsObservable.next(this.refreshChips());
     }
 
     private refreshChips(): string[] {
         const count = this.getChildrenCount();
         const chips = [];
         for (let i = 0; i < count; i++) {
-            const chip = this.getChildAt(i);
-            chips.push(chip[Chip.Text]);
+            const chip: ChipCommon = this.getChildAt(i) as ChipCommon;
+            if (this[Chip.Type] !== ChipType.Filter && this[Chip.Type] !== ChipType.Choice || chip.isChecked()) {
+                chips.push(chip[Chip.Text]);
+            }
         }
         return chips;
     }

@@ -8,12 +8,12 @@ declare var com: any;
 
 export class Chip extends ChipCommon {
 
-    isChecked(): boolean {
-        return this.nativeView.isChecked();
-    }
-
     get android(): any {
         return this.nativeView;
+    }
+
+    isChecked(): boolean {
+        return this.android && this.android.isChecked();
     }
 
     createNativeView() {
@@ -43,13 +43,13 @@ export class Chip extends ChipCommon {
     }
 
     [backgroundColorProperty.getDefault](): android.content.res.ColorStateList {
-        return this.nativeView.getBackgroundTintList();
+        return this.android.getBackgroundTintList();
     }
 
     [backgroundColorProperty.setNative](value: Color | android.content.res.ColorStateList) {
         let theValue = value instanceof Color ? android.content.res.ColorStateList.valueOf(value.android) : value;
         try {
-            this.nativeView.setBackgroundTintList(theValue);
+            this.android.setBackgroundTintList(theValue);
         } catch (err) {
             console.log(`Error setNative backgroundColorProperty: `, err);
         }
@@ -74,6 +74,10 @@ export class Chip extends ChipCommon {
                 }
 
             };
+        view.setOnClickListener(
+            new android.view.View.OnClickListener({
+                onClick: on(Chip.ClickEvent)
+            }));
         view.setOnCloseIconClickListener(
             new android.view.View.OnClickListener({
                 onClick: on(Chip.CloseEvent)

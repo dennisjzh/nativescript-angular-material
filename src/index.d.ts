@@ -10,8 +10,8 @@ export declare class AngularMaterial extends Common {
 }
 
 export declare class Chip extends ChipCommon {
+  readonly text: string;
   isChecked(): boolean;
-  newInstance(): ChipCommon;
 }
 
 export declare class ChipGroup extends ChipGroupCommon {
@@ -19,7 +19,3 @@ export declare class ChipGroup extends ChipGroupCommon {
   readonly chips: BehaviorSubject<string[]>;
 }
 
-// export declare class Test extends TestComm {
-//   greet();
-//   greet2();
-// }

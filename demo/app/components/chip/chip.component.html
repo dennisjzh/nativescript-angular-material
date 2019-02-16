@@ -1,10 +1,42 @@
-<ActionBar title="Chip" class="action-bar">
+<ActionBar title="Chips" class="action-bar">
 </ActionBar>
 <StackLayout>
-    <mat-chip-group #chipGroup single-line1 type="entry" (check)="onCheck($event)" (close)="onClose($event)">
-        <mat-chip class="chip" text="hello" (check)="onCheck($event)" (close)="onClose($event)"></mat-chip>
-        <mat-chip class="chip" text="world"></mat-chip>
-    </mat-chip-group>
-    <TextField class="input" hint="Chip" returnKeyType="done" (returnPress)="onReturnPress($event)"></TextField>
-    <Label [text]="chips"></Label>
+    <StackLayout>
+        <Label text="Entry"></Label>
+        <mat-chip-group #entryChipGroup type="entry" (close)="onClose($event)">
+            <mat-chip class="chip" text="hello"></mat-chip>
+            <mat-chip class="chip" text="world"></mat-chip>
+            <mat-chip class="chip" text="chips"></mat-chip>
+        </mat-chip-group>
+        <TextField class="input" hint="Enter new chip..." returnKeyType="done" (returnPress)="onReturnPress($event)">
+        </TextField>
+        <Label [text]="entryChips"></Label>
+    </StackLayout>
+    <StackLayout>
+        <Label text="Filter"></Label>
+        <mat-chip-group #filterChipGroup type="filter" (check)="onCheck($event)">
+            <mat-chip class="chip" text="hello"></mat-chip>
+            <mat-chip class="chip" text="world"></mat-chip>
+            <mat-chip class="chip" text="chips"></mat-chip>
+        </mat-chip-group>
+        <Label [text]="filterChips"></Label>
+    </StackLayout>
+    <StackLayout>
+        <Label text="Choice"></Label>
+        <mat-chip-group #choiceChipGroup type="choice" (check)="onCheck($event)">
+            <mat-chip class="chip" text="hello"></mat-chip>
+            <mat-chip class="chip" text="world"></mat-chip>
+            <mat-chip class="chip" text="chips"></mat-chip>
+        </mat-chip-group>
+        <Label [text]="chosenChips"></Label>
+    </StackLayout>
+    <StackLayout>
+        <Label text="Action"></Label>
+        <mat-chip-group #actionChipGroup type="action" (click)="onClick($event)">
+            <mat-chip class="chip" text="hello"></mat-chip>
+            <mat-chip class="chip" text="world"></mat-chip>
+            <mat-chip class="chip" text="chips"></mat-chip>
+        </mat-chip-group>
+        <Label [text]="actionChip ? actionChip + ' clicked' : ''"></Label>
+    </StackLayout>
 </StackLayout>
