@@ -1,4 +1,4 @@
-import {Component, ViewChild, OnInit} from "@angular/core";
+import {Component, ViewChild, OnInit, AfterViewInit, NgZone} from "@angular/core";
 import {TextField} from "tns-core-modules/ui/text-field";
 import {Chip, ChipGroup, AngularMaterial} from "nativescript-angular-material";
 
@@ -9,12 +9,15 @@ import {Chip, ChipGroup, AngularMaterial} from "nativescript-angular-material";
     styleUrls: ["./chip.component.css"]
 })
 export class ChipComponent implements OnInit {
+
     @ViewChild("chipGroup") chipGroup;
+    chips: string;
+
+    constructor(private zone: NgZone) {}
 
     ngOnInit(): void {
         const chipGroup: ChipGroup = this.chipGroup.nativeElement;
-        chipGroup.chips.subscribe(chips =>
-            console.log(chips));
+        chipGroup.chips.subscribe(chips => this.zone.run(() => this.chips = "[" + chips + "]"));
     }
 
     onReturnPress(event) {

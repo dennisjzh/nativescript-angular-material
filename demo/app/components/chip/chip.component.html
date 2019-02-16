@@ -4,9 +4,7 @@
     <mat-chip-group #chipGroup single-line1 type="entry" (check)="onCheck($event)" (close)="onClose($event)">
         <mat-chip class="chip" text="hello" (check)="onCheck($event)" (close)="onClose($event)"></mat-chip>
         <mat-chip class="chip" text="world"></mat-chip>
-        <mat-chip class="chip" text="world"></mat-chip>
-        <mat-chip class="chip" text="world"></mat-chip>
-        <!-- <mat-chip class="chip" text="world"></mat-chip> -->
     </mat-chip-group>
     <TextField class="input" hint="Chip" returnKeyType="done" (returnPress)="onReturnPress($event)"></TextField>
+    <Label [text]="chips"></Label>
 </StackLayout>
