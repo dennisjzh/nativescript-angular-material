@@ -5,6 +5,7 @@ import {MatChipModule} from "nativescript-angular-material/modules/chip";
 import {AppRoutingModule} from "./app.routing";
 import {AppComponent} from "./app.component";
 import {MainComponent} from "./components/main.component";
+import {ButtonComponent} from "./components/button/button.component";
 import {ChipComponent} from "./components/chip/chip.component";
 
 // Uncomment and add to NgModule imports if you need to use two-way binding
@@ -26,6 +27,7 @@ import {ChipComponent} from "./components/chip/chip.component";
     declarations: [
         AppComponent,
         MainComponent,
+        ButtonComponent,
         ChipComponent,
     ],
     providers: [

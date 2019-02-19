@@ -4,7 +4,7 @@ import {Chip, ChipGroup, AngularMaterial} from "nativescript-angular-material";
 import {EventData} from "tns-core-modules/ui/page/page";
 
 @Component({
-    selector: "chip",
+    selector: "ns-chip",
     moduleId: module.id,
     templateUrl: "./chip.component.html",
     styleUrls: ["./chip.component.css"]

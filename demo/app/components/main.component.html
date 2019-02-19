@@ -1,13 +1,6 @@
 <ActionBar title="My App" class="action-bar">
 </ActionBar>
-<GridLayout rows="*">
-    <mat-chip-group single-line1 type="entry" (tap)="onTap($event)" (check)="onCheck($event)" (close)="onClose($event)">
-        <mat-chip class="chip" text="hello" (tap)="onTap($event)" (check)="onCheck($event)" (close)="onClose($event)"></mat-chip>
-        <mat-chip class="chip" text="world"></mat-chip>
-        <mat-chip class="chip" text="world"></mat-chip>
-        <mat-chip class="chip" text="world"></mat-chip>
-        <mat-chip class="chip" text="world"></mat-chip>
-    </mat-chip-group>
-    <mat-button mat-fab row="0" class="button-left" (tap)="onTap($event)">mat button</mat-button>
-    <mat-button row="0" class="button-right" (tap)="onTap($event)">mat button</mat-button>
-</GridLayout>
+<StackLayout>
+    <Button text="Buttons" [nsRouterLink]="['/button']" pageTransition="slide"></Button>
+    <Button text="Chips" [nsRouterLink]="['/chip']" pageTransition="slide"></Button>
+</StackLayout>
