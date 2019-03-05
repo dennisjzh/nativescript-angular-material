@@ -1,9 +1,9 @@
 import {Color} from 'tns-core-modules/color';
 import {backgroundColorProperty} from 'tns-core-modules/ui/core/view';
-import {ButtonCommon} from './button.common';
+import * as ImageSource from 'tns-core-modules/image-source';
+import {ButtonCommon, ButtonType, iconProperty} from './button.common';
 
 declare var android: any;
-declare var com: any;
 
 export class Button extends ButtonCommon {
 
@@ -17,10 +17,31 @@ export class Button extends ButtonCommon {
         return view;
     }
 
-    private createNativeViewByType() {
-        return (Button.FabButton in this) ?
-            new android.support.design.widget.FloatingActionButton(this._context) :
-            new android.support.design.button.MaterialButton(this._context);
+    [iconProperty.setNative](value: any) {
+        let iconDrawable = null;
+        if (ImageSource.isFileOrResourcePath(value)) {
+            iconDrawable = ImageSource.fromFileOrResource(value);
+            if (iconDrawable) {
+                this.android.setScaleType(android.widget.ImageView.ScaleType.CENTER);
+                this.android.setImageBitmap(iconDrawable.android);
+            }
+        } else {
+            const resources = android.content.res.Resources.getSystem();
+            const drawableId = resources.getIdentifier(value, 'drawable', 'android');
+            iconDrawable = resources.getDrawable(drawableId);
+            if (iconDrawable) {
+                this.android.setImageDrawable(iconDrawable);
+            }
+        }
+    }
+
+    [backgroundColorProperty.getDefault](): android.content.res.ColorStateList {
+        return this.android.getBackgroundTintList();
+    }
+
+    [backgroundColorProperty.setNative](value: Color | android.content.res.ColorStateList) {
+        let theValue = value instanceof Color ? android.content.res.ColorStateList.valueOf(value.android) : value;
+        this.android.setBackgroundTintList(theValue);
     }
 
     private setOnClickListener(view) {
@@ -39,16 +60,10 @@ export class Button extends ButtonCommon {
         );
     }
 
-    [backgroundColorProperty.getDefault](): android.content.res.ColorStateList {
-        return this.nativeView.getBackgroundTintList();
+    private createNativeViewByType() {
+        return this[Button.Type] === ButtonType.Fab ?
+            new android.support.design.widget.FloatingActionButton(this._context) :
+            new android.support.design.button.MaterialButton(this._context); // , null, android.R.style.Widget.MaterialComponents.Button.UnelevatedButton);
     }
 
-    [backgroundColorProperty.setNative](value: Color | android.content.res.ColorStateList) {
-        let theValue = value instanceof Color ? android.content.res.ColorStateList.valueOf(value.android) : value;
-        try {
-            this.nativeView.setBackgroundTintList(theValue);
-        } catch (err) {
-            console.log(`Error setNative backgroundColorProperty: `, err);
-        }
-    }
 }

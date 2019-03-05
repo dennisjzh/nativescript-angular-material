@@ -1,16 +1,16 @@
 .button-left {
-    height: 50em;
-    width: 50em;
-    margin: 15em;
+    height: 100;
+    width: 100;
+    margin: 15;
     background-color: purple;
     horizontal-align: left;
     vertical-align: bottom;
 }
 
 .button-right {
-    height: 50em;
-    width: 50em;
-    margin: 15em;
+    height: 50;
+    width: 50;
+    margin: 15;
     background-color: purple;
     horizontal-align: right;
     vertical-align: bottom;
