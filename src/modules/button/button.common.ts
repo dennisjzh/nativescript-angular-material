@@ -22,3 +22,9 @@ export const iconProperty = new Property<ButtonCommon, string>({
 });
 iconProperty.register(ButtonCommon);
 
+export const textProperty = new Property<ButtonCommon, string>({
+    name: 'text',
+    affectsLayout: true
+});
+textProperty.register(ButtonCommon);
+

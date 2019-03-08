@@ -1,7 +1,7 @@
 import {Color} from 'tns-core-modules/color';
 import {backgroundColorProperty} from 'tns-core-modules/ui/core/view';
 import * as ImageSource from 'tns-core-modules/image-source';
-import {ButtonCommon, ButtonType, iconProperty} from './button.common';
+import {ButtonCommon, ButtonType, iconProperty, textProperty} from './button.common';
 
 declare var android: any;
 
@@ -18,6 +18,9 @@ export class Button extends ButtonCommon {
     }
 
     [iconProperty.setNative](value: any) {
+        if (!this.android.setImageBitmap || !this.android.setImageDrawable) {
+            return;
+        }
         let iconDrawable = null;
         if (ImageSource.isFileOrResourcePath(value)) {
             iconDrawable = ImageSource.fromFileOrResource(value);
@@ -33,6 +36,10 @@ export class Button extends ButtonCommon {
                 this.android.setImageDrawable(iconDrawable);
             }
         }
+    }
+
+    [textProperty.setNative](value: any) {
+        this.android.setText && this.android.setText(value);
     }
 
     [backgroundColorProperty.getDefault](): android.content.res.ColorStateList {
