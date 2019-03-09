@@ -1,7 +1,7 @@
-import { NgModule } from "@angular/core";
-import { registerElement } from "nativescript-angular/element-registry";
-import {ChipCommon} from "../../chip.common";
-import {ChipGroupCommon} from "../../chip.group.common";
+import {NgModule} from "@angular/core";
+import {registerElement} from "nativescript-angular/element-registry";
+import {ChipCommon} from "./chip.common";
+import {ChipGroupCommon} from "./chip.group.common";
 
 @NgModule({
     imports: [
@@ -13,7 +13,7 @@ import {ChipGroupCommon} from "../../chip.group.common";
     providers: [
     ],
 })
-export class MatChipModule { }
+export class MatChipModule {}
 
 registerElement(ChipCommon.MatChip, () => require("./chip").Chip);
 registerElement(ChipGroupCommon.MatChipGroup, () => require("./chip.group").ChipGroup);
