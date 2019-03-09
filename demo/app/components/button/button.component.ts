@@ -12,8 +12,8 @@ export class ButtonComponent {
 
     constructor() {}
 
-    onTap(e) {
-        console.log("tap - " + e.object.typeName);
+    onClick(e) {
+        console.log("click - " + e.object.typeName);
     }
 
 }

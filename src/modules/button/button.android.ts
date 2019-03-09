@@ -60,7 +60,7 @@ export class Button extends ButtonCommon {
                 },
                 onClick: function (v) {
                     if (this.owner) {
-                        this.owner._emit(Button.TabEvent);
+                        this.owner._emit(Button.ClickEvent);
                     }
                 }
             })

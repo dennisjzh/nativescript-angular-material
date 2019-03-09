@@ -12,7 +12,7 @@ export class ButtonCommon extends View {
 
     static readonly MatButton = "mat-button";
     static readonly Type = "type";
-    static readonly TabEvent = "tap";
+    static readonly ClickEvent = "click";
 
 }
 

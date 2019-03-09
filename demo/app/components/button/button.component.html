@@ -1,8 +1,8 @@
 <ActionBar title="Button" class="action-bar">
 </ActionBar>
 <GridLayout rows="*">
-    <mat-button type="fab" icon="res://icon" (tap)="onTap($event)" row="0" class="button-left">
+    <mat-button type="fab" icon="res://icon" (click)="onClick($event)" row="0" class="button-left">
     </mat-button>
-    <mat-button text="mat-button" (tap)="onTap($event)" row="0" class="button-right">
+    <mat-button text="mat-button" (click)="onClick($event)" row="0" class="button-right">
     </mat-button>
 </GridLayout>
