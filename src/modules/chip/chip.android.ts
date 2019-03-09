@@ -1,6 +1,6 @@
 import {Color} from 'tns-core-modules/color';
 import {backgroundColorProperty, EventData} from 'tns-core-modules/ui/core/view';
-import {ChipCommon, ChipType} from './chip.common';
+import {ChipCommon, ChipType, textProperty} from './chip.common';
 
 
 declare var android: any;
@@ -19,7 +19,6 @@ export class Chip extends ChipCommon {
     createNativeView() {
         let view = this.createNativeViewByType();
         this.setUpListeners(view);
-        view.setText(this[Chip.Text]);
         this.setType(view, this[Chip.Type] || this.parent[Chip.Type]);
         return view;
     }
@@ -42,17 +41,17 @@ export class Chip extends ChipCommon {
         }
     }
 
+    [textProperty.setNative](value: any) {
+        this.android.setText && this.android.setText(value);
+    }
+
     [backgroundColorProperty.getDefault](): android.content.res.ColorStateList {
         return this.android.getBackgroundTintList();
     }
 
     [backgroundColorProperty.setNative](value: Color | android.content.res.ColorStateList) {
         let theValue = value instanceof Color ? android.content.res.ColorStateList.valueOf(value.android) : value;
-        try {
-            this.android.setBackgroundTintList(theValue);
-        } catch (err) {
-            console.log(`Error setNative backgroundColorProperty: `, err);
-        }
+        this.android.setBackgroundTintList(theValue);
     }
 
     private createNativeViewByType() {

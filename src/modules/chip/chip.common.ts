@@ -1,4 +1,4 @@
-import {View} from 'tns-core-modules/ui/page/page';
+import {View, Property} from 'tns-core-modules/ui/page/page';
 
 export enum ChipType {
     Action = "action",
@@ -19,3 +19,10 @@ export abstract class ChipCommon extends View {
     abstract isChecked(): boolean;
 
 }
+
+export const textProperty = new Property<ChipCommon, string>({
+    name: ChipCommon.Text,
+    affectsLayout: true
+});
+textProperty.register(ChipCommon);
+
