@@ -1,0 +1,15 @@
+.button-left {
+    height: 50;
+    margin: 15;
+    background-color: purple;
+    horizontal-align: left;
+    vertical-align: bottom;
+}
+
+.button-right {
+    height: 50;
+    margin: 15;
+    background-color: purple;
+    horizontal-align: right;
+    vertical-align: bottom;
+}

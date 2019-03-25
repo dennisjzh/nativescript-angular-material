@@ -1,6 +1,8 @@
-<ActionBar title="My App" class="action-bar">
-</ActionBar>
+<!-- <ActionBar title="My App" class="action-bar">
+    <NavigationButton android.systemIcon="ic_menu_back" text="Back to ActionBar" (tap)="goBack()"></NavigationButton>
+</ActionBar> -->
 <StackLayout>
     <Button text="Buttons" [nsRouterLink]="['/button']" pageTransition="slide"></Button>
     <Button text="Chips" [nsRouterLink]="['/chip']" pageTransition="slide"></Button>
+    <Button text="Collapsing Toolbar" [nsRouterLink]="['/collapsing-toolbar']" pageTransition="slide"></Button>
 </StackLayout>
